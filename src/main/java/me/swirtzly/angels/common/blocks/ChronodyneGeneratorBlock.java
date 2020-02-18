@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 
 
 public class ChronodyneGeneratorBlock extends Block {
-	
+
 	private static final VoxelShape CG_AABB = VoxelShapes.create(new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.09375D, 1.0D));
 
     public ChronodyneGeneratorBlock() {
@@ -37,14 +37,14 @@ public class ChronodyneGeneratorBlock extends Block {
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new ChronodyneGeneratorTile();
-	}
-	
+    }
+
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return CG_AABB;
 	}
-	
-	@Override
+
+    @Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return CG_AABB;
 	}
@@ -60,10 +60,5 @@ public class ChronodyneGeneratorBlock extends Block {
 	public boolean isVariableOpacity() {
 		return false;
 	}
-
-
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
 }
+

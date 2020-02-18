@@ -1,6 +1,8 @@
 package me.swirtzly.angels.client.models.entity;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import me.swirtzly.angels.client.models.poses.PoseBase;
 import me.swirtzly.angels.client.models.poses.PoseManager;
 import me.swirtzly.angels.client.models.poses.PoseThinking;
@@ -54,6 +56,7 @@ public class ModelAngelEd <T extends LivingEntity> extends BipedModel<T>{
 	private ModelRenderer right_wing_4;
 	
 	public ModelAngelEd() {
+        super(1.0F);
 		textureWidth = 88;
 		textureHeight = 88;
 		teeth_1 = new ModelRenderer(this, 63, 39);
@@ -211,48 +214,49 @@ public class ModelAngelEd <T extends LivingEntity> extends BipedModel<T>{
 		back_cloth.addChild(back_cloth_2);
 	}
 
+    @Override
+    public void render(MatrixStack matrixStack, IVertexBuilder iVertexBuilder, int p_225598_3_, int p_225598_4_, float p_225598_5_, float p_225598_6_, float p_225598_7_, float p_225598_8_) {
+        super.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        RenderSystem.pushMatrix();
+        RenderSystem.enableCull();
+        RenderSystem.enableLighting();
+        angelAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
+        cloth_1.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        right_arm.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        head.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        cloth_0.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        back_cloth.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        cloth_2.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        left_wing_1.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        body_2.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        right_wing_1.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        body.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        right_wing_0.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        left_wing_0.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        left_arm.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        RenderSystem.disableLighting();
+        RenderSystem.disableCull();
+        RenderSystem.popMatrix();
+    }
+
     public void quickRender(float scale, String pose) {
 		RenderSystem.pushMatrix();
 		RenderSystem.enableCull();
 		RenderSystem.enableLighting();
         tilePosing(pose);
-		cloth_1.render(matrixStack, iVertexBuilder, i, i1);
-		right_arm.render(matrixStack, iVertexBuilder, i, i1);
-		head.render(matrixStack, iVertexBuilder, i, i1);
-		cloth_0.render(matrixStack, iVertexBuilder, i, i1);
-		back_cloth.render(matrixStack, iVertexBuilder, i, i1);
-		cloth_2.render(matrixStack, iVertexBuilder, i, i1);
-		left_wing_1.render(matrixStack, iVertexBuilder, i, i1);
-		body_2.render(matrixStack, iVertexBuilder, i, i1);
-		right_wing_1.render(matrixStack, iVertexBuilder, i, i1);
-		body.render(matrixStack, iVertexBuilder, i, i1);
-		right_wing_0.render(matrixStack, iVertexBuilder, i, i1);
-		left_wing_0.render(matrixStack, iVertexBuilder, i, i1);
-		left_arm.render(matrixStack, iVertexBuilder, i, i1);
-		RenderSystem.disableLighting();
-		RenderSystem.disableCull();
-		RenderSystem.popMatrix();
-	}
-	
-	@Override
-	public void render(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		RenderSystem.pushMatrix();
-		RenderSystem.enableCull();
-		RenderSystem.enableLighting();
-		angelAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
-		cloth_1.render(matrixStack, iVertexBuilder, i, i1);
-		right_arm.render(matrixStack, iVertexBuilder, i, i1);
-		head.render(matrixStack, iVertexBuilder, i, i1);
-		cloth_0.render(matrixStack, iVertexBuilder, i, i1);
-		back_cloth.render(matrixStack, iVertexBuilder, i, i1);
-		cloth_2.render(matrixStack, iVertexBuilder, i, i1);
-		left_wing_1.render(matrixStack, iVertexBuilder, i, i1);
-		body_2.render(matrixStack, iVertexBuilder, i, i1);
-		right_wing_1.render(matrixStack, iVertexBuilder, i, i1);
-		body.render(matrixStack, iVertexBuilder, i, i1);
-		right_wing_0.render(matrixStack, iVertexBuilder, i, i1);
-		left_wing_0.render(matrixStack, iVertexBuilder, i, i1);
-		left_arm.render(matrixStack, iVertexBuilder, i, i1);
+        cloth_1.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        right_arm.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        head.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        cloth_0.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        back_cloth.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        cloth_2.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        left_wing_1.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        body_2.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        right_wing_1.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        body.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        right_wing_0.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        left_wing_0.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
+        left_arm.render(matrixStack, iVertexBuilder, p_225598_3_, p_225598_4_, p_225598_5_, p_225598_6_, p_225598_7_, p_225598_8_);
 		RenderSystem.disableLighting();
 		RenderSystem.disableCull();
 		RenderSystem.popMatrix();
@@ -285,8 +289,8 @@ public class ModelAngelEd <T extends LivingEntity> extends BipedModel<T>{
 	protected ModelRenderer getArmForSide(HandSide side) {
 		return side == HandSide.LEFT ? left_arm : right_arm;
 	}
-	
-	private void angelAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netheadYaw, float headPitch, float scaleFactor, Entity entity) {
+
+    private void angelAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netheadYaw, float headPitch, float scaleFactor, Entity entity) {
 
         if (entity instanceof WeepingAngelEntity) {
 			

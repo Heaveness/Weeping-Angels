@@ -68,9 +68,9 @@ public class WeepingAngelEntity extends QuantumLockBaseEntity {
 	}
 
     public void dropAngelStuff() {
-        ResourceLocation resourcelocation = this.func_213346_cF();
+		ResourceLocation resourcelocation = this.getLootTable();
         LootTable loottable = this.world.getServer().getLootTableManager().getLootTableFromLocation(resourcelocation);
-        LootContext.Builder lootcontext$builder = this.func_213363_a(true, DamageSource.STARVE);
+		LootContext.Builder lootcontext$builder = this.getLootContextBuilder(true, DamageSource.STARVE);
         loottable.generate(lootcontext$builder.build(LootParameterSets.ENTITY), this::entityDropItem);
 		entityDropItem(getHeldItemMainhand());
 		entityDropItem(getHeldItemOffhand());
@@ -251,7 +251,8 @@ public class WeepingAngelEntity extends QuantumLockBaseEntity {
 		if (player instanceof ServerPlayerEntity && getSeenTime() == 1 && getPrevPos().toLong() != getPosition().toLong() && !player.isCreative()) {
 			setPrevPos(getPosition());
 			if (WAConfig.CONFIG.playSeenSounds.get() && player.getDistance(this) < 10) {
-				((ServerPlayerEntity) player).connection.sendPacket(new SPlaySoundEffectPacket(getSeenSound(), SoundCategory.HOSTILE, player.posX, player.posY, player.posZ, 1.0F, 1.0F));
+				BlockPos pos = player.getPosition();
+				((ServerPlayerEntity) player).connection.sendPacket(new SPlaySoundEffectPacket(getSeenSound(), SoundCategory.HOSTILE, pos.getX(), pos.getY(), pos.getZ(), 1.0F, 1.0F));
 			}
 			if (getAngelType() != AngelEnums.AngelType.ANGEL_THREE.getId()) {
 				setPose(PoseManager.getRandomPose().getRegistryName());
@@ -389,8 +390,8 @@ public class WeepingAngelEntity extends QuantumLockBaseEntity {
 				break;
 			case RANDOM_PLACE:
 				if (rand.nextBoolean()) {
-					double x = player.posX + rand.nextInt(WAConfig.CONFIG.teleportRange.get());
-					double z = player.posZ + rand.nextInt(WAConfig.CONFIG.teleportRange.get());
+					double x = player.getX() + rand.nextInt(WAConfig.CONFIG.teleportRange.get());
+					double z = player.getZ() + rand.nextInt(WAConfig.CONFIG.teleportRange.get());
 					world.getServer().enqueue(new TickDelayedTask(0, () -> {
 						ServerWorld teleportWorld = WAConfig.CONFIG.angelDimTeleport.get() ? Objects.requireNonNull(DimensionManager.getWorld(ServerLifecycleHooks.getCurrentServer(), WATeleporter.getRandomDimension(world.rand), true, true)) : DimensionManager.getWorld(ServerLifecycleHooks.getCurrentServer(), player.dimension, true, true);
 						if (teleportWorld != null) {
