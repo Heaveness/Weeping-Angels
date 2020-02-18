@@ -1,6 +1,6 @@
 package me.swirtzly.angels.client.renders.entities;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import me.swirtzly.angels.client.models.entity.ModelCG;
 import me.swirtzly.angels.common.entities.ChronodyneGeneratorEntity;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -21,13 +21,13 @@ public class CGRender extends SpriteRenderer<ChronodyneGeneratorEntity> {
 
     @Override
     public void doRender(ChronodyneGeneratorEntity entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        GlStateManager.pushMatrix();
-        GlStateManager.translated(x, y - 1.3, z);
-        GlStateManager.disableFog();
-        GlStateManager.disableLighting();
+        RenderSystem.pushMatrix();
+        RenderSystem.translated(x, y - 1.3, z);
+        RenderSystem.disableFog();
+        RenderSystem.disableLighting();
         model.render(entity, 0, 0, 0, 0, 0, 0.0625F);
-        GlStateManager.enableFog();
-        GlStateManager.enableLighting();
-        GlStateManager.popMatrix();
+        RenderSystem.enableFog();
+        RenderSystem.enableLighting();
+        RenderSystem.popMatrix();
     }
 }

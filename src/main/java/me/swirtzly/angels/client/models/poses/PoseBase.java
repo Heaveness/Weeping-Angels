@@ -1,7 +1,7 @@
 package me.swirtzly.angels.client.models.poses;
 
 import me.swirtzly.angels.common.entities.WeepingAngelEntity;
-import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -35,12 +35,12 @@ public abstract class PoseBase {
 	/**
 	 * Used to set the Models arm angles
 	 */
-	public abstract void setArmAngles(RendererModel left_arm, RendererModel right_arm, RendererModel wrist_left, RendererModel wrist_right);
+	public abstract void setArmAngles(ModelRenderer left_arm, ModelRenderer right_arm, ModelRenderer wrist_left, ModelRenderer wrist_right);
 	
 	/**
 	 * Used to set the Models head angles
 	 */
-	public abstract void setHeadAngles(RendererModel head);
+	public abstract void setHeadAngles(ModelRenderer head);
 	
 	/**
 	 * Determines angry face
@@ -50,12 +50,12 @@ public abstract class PoseBase {
 	/**
 	 * Determines body angles, I wouldn't really reccomend messing with this, it's not pretty
 	 */
-	public abstract void setBodyAngles(RendererModel body);
+	public abstract void setBodyAngles(ModelRenderer body);
 	
 	/**
 	 * Basically I never use this, it's there for the sake of it, used to set wing angles
 	 */
-	public abstract void setWingAngles(RendererModel left_wing, RendererModel right_wing);
+	public abstract void setWingAngles(ModelRenderer left_wing, ModelRenderer right_wing);
 	
 	/**
 	 * Returns the entities Limb Swing
@@ -114,7 +114,7 @@ public abstract class PoseBase {
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public void resetAngles(RendererModel model) {
+	public void resetAngles(ModelRenderer model) {
 		model.rotateAngleX = 0;
 		model.rotateAngleY = 0;
 		model.rotateAngleY = 0;

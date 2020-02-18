@@ -7,7 +7,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -61,6 +60,7 @@ public class ChronodyneGeneratorBlock extends Block {
 	public boolean isVariableOpacity() {
 		return false;
 	}
+
 
 	@Override
 	public BlockRenderLayer getRenderLayer() {

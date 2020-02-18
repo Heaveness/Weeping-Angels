@@ -1,6 +1,6 @@
 package me.swirtzly.angels.client.renders.entities;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import me.swirtzly.angels.WeepingAngels;
 import me.swirtzly.angels.client.models.entity.*;
 import me.swirtzly.angels.client.renders.entities.layers.CrackLayer;
@@ -53,9 +53,9 @@ public class AngelRender extends MobRenderer {
     //TODO: Find cause of Angel rendering full bright when not being directly looked at
     @Override
     protected void renderModel(LivingEntity living, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
-        //  GlStateManager.setProfile(GlStateManager.Profile.TRANSPARENT_MODEL);
+        //  RenderSystem.setProfile(RenderSystem.Profile.TRANSPARENT_MODEL);
         if (living instanceof WeepingAngelEntity) {
-            GlStateManager.pushMatrix();
+            RenderSystem.pushMatrix();
             WeepingAngelEntity angel = (WeepingAngelEntity) living;
 
             switch (angel.getAngelType()) {
@@ -80,8 +80,8 @@ public class AngelRender extends MobRenderer {
                     modelMel.render(angel, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
                     break;
             }
-            //  GlStateManager.unsetProfile(GlStateManager.Profile.TRANSPARENT_MODEL);
-            GlStateManager.popMatrix();
+            //  RenderSystem.unsetProfile(RenderSystem.Profile.TRANSPARENT_MODEL);
+            RenderSystem.popMatrix();
 
         }
     }

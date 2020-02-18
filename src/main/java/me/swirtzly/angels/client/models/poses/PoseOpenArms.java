@@ -1,7 +1,7 @@
 package me.swirtzly.angels.client.models.poses;
 
 import me.swirtzly.angels.common.entities.WeepingAngelEntity;
-import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
 
 public class PoseOpenArms extends PoseBase {
 	
@@ -13,7 +13,7 @@ public class PoseOpenArms extends PoseBase {
 	}
 	
 	@Override
-	public void setArmAngles(RendererModel left_arm, RendererModel right_arm, RendererModel wrist_left, RendererModel wrist_right) {
+	public void setArmAngles(ModelRenderer left_arm, ModelRenderer right_arm, ModelRenderer wrist_left, ModelRenderer wrist_right) {
 		left_arm.rotateAngleX = degreeToRadian(-90);
 		right_arm.rotateAngleX = degreeToRadian(-90);
 		
@@ -28,7 +28,7 @@ public class PoseOpenArms extends PoseBase {
 	}
 	
 	@Override
-	public void setHeadAngles(RendererModel head) {
+	public void setHeadAngles(ModelRenderer head) {
 		head.rotateAngleX = degreeToRadian(15);
 	}
 	
@@ -38,12 +38,12 @@ public class PoseOpenArms extends PoseBase {
 	}
 	
 	@Override
-	public void setWingAngles(RendererModel left_wing, RendererModel right_wing) {
+	public void setWingAngles(ModelRenderer left_wing, ModelRenderer right_wing) {
 		
 	}
 	
 	@Override
-	public void setBodyAngles(RendererModel body) {
+	public void setBodyAngles(ModelRenderer body) {
 		body.rotateAngleX = degreeToRadian(0);
 	}
 	

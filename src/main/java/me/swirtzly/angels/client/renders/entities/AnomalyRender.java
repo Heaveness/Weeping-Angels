@@ -1,12 +1,14 @@
 package me.swirtzly.angels.client.renders.entities;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.systems.RenderSystem;
 import me.swirtzly.angels.common.entities.AnomalyEntity;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.DefaultRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -15,7 +17,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.Random;
 
-public class AnomalyRender extends DefaultRenderer {
+public class AnomalyRender extends LivingRenderer {
 	
 	private Random random;
 
@@ -31,10 +33,10 @@ public class AnomalyRender extends DefaultRenderer {
 
 		AnomalyEntity anom = (AnomalyEntity) entity;
 		
-		GlStateManager.pushMatrix();
-		GlStateManager.translated(x, y + anom.getEntityEyeHeight(), z + 0.2F);
+		RenderSystem.pushMatrix();
+		RenderSystem.translated(x, y + anom.getEntityEyeHeight(), z + 0.2F);
 		float scale = 0.1F;
-		GlStateManager.scaled(scale, scale, scale);
+		RenderSystem.scaled(scale, scale, scale);
 
 		int timer = ((AnomalyEntity) entity).ticksExisted;
 		
@@ -49,23 +51,23 @@ public class AnomalyRender extends DefaultRenderer {
 				f1 = (f - 0.8F) / 0.2F;
 			}
 
-			GlStateManager.disableTexture();
-			GlStateManager.shadeModel(7425);
-			GlStateManager.enableBlend();
-			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-			GlStateManager.disableAlphaTest();
-			GlStateManager.enableCull();
-			GlStateManager.depthMask(false);
-			GlStateManager.pushMatrix();
-			GlStateManager.translatef(0.0F, -1.0F, -2.0F);
+			RenderSystem.disableTexture();
+			RenderSystem.shadeModel(7425);
+			RenderSystem.enableBlend();
+			RenderSystem.blendFunc(RenderSystem.SourceFactor.SRC_ALPHA, RenderSystem.DestFactor.ONE);
+			RenderSystem.disableAlphaTest();
+			RenderSystem.enableCull();
+			RenderSystem.depthMask(false);
+			RenderSystem.pushMatrix();
+			RenderSystem.translatef(0.0F, -1.0F, -2.0F);
 			
 			for (int i = 0; (float) i < (f + f * f) / 2.0F * 60.0F; ++i) {
-				GlStateManager.rotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
-				GlStateManager.rotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
-				GlStateManager.rotatef(random.nextFloat() * 360.0F, 0.0F, 0.0F, 1.0F);
-				GlStateManager.rotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
-				GlStateManager.rotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
-				GlStateManager.rotatef(random.nextFloat() * 360.0F + f * 90.0F, 0.0F, 0.0F, 1.0F);
+				RenderSystem.rotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
+				RenderSystem.rotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
+				RenderSystem.rotatef(random.nextFloat() * 360.0F, 0.0F, 0.0F, 1.0F);
+				RenderSystem.rotatef(random.nextFloat() * 360.0F, 1.0F, 0.0F, 0.0F);
+				RenderSystem.rotatef(random.nextFloat() * 360.0F, 0.0F, 1.0F, 0.0F);
+				RenderSystem.rotatef(random.nextFloat() * 360.0F + f * 90.0F, 0.0F, 0.0F, 1.0F);
 				float f2 = random.nextFloat() * 20.0F + 5.0F + f1 * 10.0F;
 				float f3 = random.nextFloat() * 2.0F + 1.0F + f1 * 2.0F;
 				bufferbuilder.begin(6, DefaultVertexFormats.POSITION_COLOR);
@@ -88,18 +90,18 @@ public class AnomalyRender extends DefaultRenderer {
 				tessellator.draw();
 			}
 			
-			GlStateManager.popMatrix();
-			GlStateManager.depthMask(true);
-			GlStateManager.disableCull();
-			GlStateManager.disableBlend();
-			GlStateManager.shadeModel(7424);
-			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GlStateManager.enableTexture();
-			GlStateManager.enableAlphaTest();
+			RenderSystem.popMatrix();
+			RenderSystem.depthMask(true);
+			RenderSystem.disableCull();
+			RenderSystem.disableBlend();
+			RenderSystem.shadeModel(7424);
+			RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+			RenderSystem.enableTexture();
+			RenderSystem.enableAlphaTest();
 			RenderHelper.enableStandardItemLighting();
 		}
 		
-		GlStateManager.popMatrix();
+		RenderSystem.popMatrix();
 	}
 	
 	private Color getRandomColor() {

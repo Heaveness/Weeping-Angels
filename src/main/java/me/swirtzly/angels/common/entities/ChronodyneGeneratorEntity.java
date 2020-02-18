@@ -45,7 +45,8 @@ public class ChronodyneGeneratorEntity extends ThrowableEntity implements IRende
 
 	@Override
 	public void tick() {
-		double speed = new Vec3d(posX, posY, posZ).distanceTo(new Vec3d(prevPosX, prevPosY, prevPosZ));
+    	BlockPos pos = getPosition();
+		double speed = new Vec3d(pos.getX(), pos.getY(), pos.getZ()).distanceTo(new Vec3d(prevPosX, prevPosY, prevPosZ));
 		if (!this.world.isRemote && (ticksExisted > 30 * 20 || speed < 0.01)) {
 			this.remove();
 		}
@@ -86,9 +87,9 @@ public class ChronodyneGeneratorEntity extends ThrowableEntity implements IRende
 				world.setBlockState(pos, WAObjects.Blocks.CG.get().getDefaultState());
 				if (world.getTileEntity(pos) != null) {
 					CompoundNBT tileData = world.getTileEntity(pos).getTileData();
-					tileData.putDouble(WAConstants.ABS_X, posX);
-					tileData.putDouble(WAConstants.ABS_Y, posY);
-					tileData.putDouble(WAConstants.ABS_Z, posZ);
+					tileData.putDouble(WAConstants.ABS_X, getPosition().getX());
+					tileData.putDouble(WAConstants.ABS_Y, getPosition().getY());
+					tileData.putDouble(WAConstants.ABS_Z, getPosition().getZ());
 					remove();
 				}
 			}
