@@ -47,10 +47,6 @@ public class EventHandler {
 				} else {
 					Item pick = item.getItem();
 					
-					if (pick != Items.DIAMOND_PICKAXE && victim.world.getDifficulty() == Difficulty.HARD) {
-						e.setCanceled(true);
-					}
-					
 					victim.playSound(SoundEvents.BLOCK_STONE_BREAK, 1.0F, 1.0F);
 				}
 				
