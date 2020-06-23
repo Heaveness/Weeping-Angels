@@ -134,9 +134,6 @@ public class EventHandler {
                     attacker.attackEntityFrom(WAObjects.STONE, 2F);
                     victim.playSound(SoundEvents.BLOCK_STONE_BREAK, 1.0F, 1.0F);
                 }
-                else if (pick != Items.DIAMOND_PICKAXE && victim.world.getDifficulty() == EnumDifficulty.HARD) {
-                    e.setCanceled(true);
-                }
                 else if (!(source instanceof Entity)) {
                     e.setCanceled(true);
                 }
